@@ -25,18 +25,18 @@ public class Building extends JPanel implements ActionListener{
 	
 	//simulation control objects/values
 	JFrame frame;
-	Control control; //
 	Timer timer; //Event control	
 	int time = 0; //Track time as the simulation runs
+	Settings settings;
 	
 	/* constructor will setup our main Graphic User Interface - a simple Frame! */
-	public Building(Control ctl, String title) {
+	public Building(Settings sets, String title) {
 		// used for Control callback
-		this.control = ctl;
+		this.settings = sets;
 		
 		//Setup the GUI
 		frame = new JFrame(title);
-		frame.setSize(ctl.frameX,ctl.frameY); //set the size
+		frame.setSize(sets.frameX, sets.frameY); //set the size
 		
 		//add this so that hitting the x button will actually end the program
 		//the program will continue to run behind the scenes and you might end up with 10+ of them
@@ -53,7 +53,7 @@ public class Building extends JPanel implements ActionListener{
 		//Timer for animation
 		//Argument 1: timerValue is a period in milliseconds to fire event
 		//Argument 2:t any class that "implements ActionListener"
-		timer = new Timer(control.timerValue, this); //timer constructor
+		timer = new Timer(settings.timerValue, this); //timer constructor
 		timer.restart(); //restart or start
 		
 		// frame becomes visible
@@ -72,12 +72,12 @@ public class Building extends JPanel implements ActionListener{
 	public void paint(Graphics g) {
 		
 		//tracking total time manually with the time variable
-		time += control.timerValue;
+		time += settings.timerValue;
 		
 		//events
 		super.paintComponent(g); // a necessary call to the parent paint method, required for proper screen refreshing
 		control.paintWalls(g);
-		control.paintPersons(g); // repaint all objects in simulation
+		control.paint(g); // repaint all objects in simulation
 		
 	} 
 		

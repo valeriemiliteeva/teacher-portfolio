@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 //A citizen is a Person and contains properties to support position and movement
 public abstract class Resident {
 	//dynamic copy of Control instance, used for settings
-	Control ctl = null;
+	Settings settings;
 	
 	//grid boundaries
 	protected int xExt, yExt;
@@ -41,18 +41,18 @@ public abstract class Resident {
 	/*
 	 * Constructor using Control Panel values
 	 */
-	public Resident(Control ctl) {
+	public Resident(Settings sets) {
 		// Settings
-		this.ctl = ctl;
+		this.settings = sets;
 		
 		// Grid size
-		xExt = ctl.xExt;
-		yExt = ctl.yExt;
+		xExt = sets.xExt;
+		yExt = sets.yExt;
 		// position in grid
-		width = ctl.OvalW;
-		height = ctl.OvalH;
+		width = sets.OvalW;
+		height = sets.OvalH;
 		// roaming probability
-		roamingPercent = ctl.toRoam;
+		roamingPercent = sets.toRoam;
 		
 		this.init();
 	}

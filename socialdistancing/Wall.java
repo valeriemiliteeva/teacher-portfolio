@@ -1,9 +1,11 @@
 package socialdistancing;
 
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
 public class Wall{
 
@@ -59,5 +61,10 @@ public class Wall{
     
     public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
+    }
+    
+    public void paint(Graphics g, JPanel view)  {
+		g.drawImage(getImage(), getX(), getY(), view);
+
     }
 }

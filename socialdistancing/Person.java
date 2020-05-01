@@ -1,5 +1,7 @@
 package socialdistancing;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 // A person contains properties of Health
@@ -15,7 +17,7 @@ public class Person extends Resident {
 	//control variables
 	double toRoam, toBeInfected, toDie;
 	int sickTimeLow, sickTimeMax;
-
+	
 	/*
 	 * Default Person constructor from Static values
 	 */
@@ -30,14 +32,14 @@ public class Person extends Resident {
 	}
 
 	//Person constructed according to Control Panel settings
-	public Person(Control ctl) {
-		super(ctl);
+	public Person(Settings sets) {
+		super(sets);
 		
-		toRoam = ctl.toRoam;			    
-		toDie = ctl.toDie;		
-		toBeInfected = ctl.toBeInfected;
-		sickTimeLow = ctl.sickTimeLow;
-		sickTimeMax = ctl.sickTimeMax;
+		toRoam = sets.toRoam;			    
+		toDie = sets.toDie;		
+		toBeInfected = sets.toBeInfected;
+		sickTimeLow = sets.sickTimeLow;
+		sickTimeMax = sets.sickTimeMax;
 
 		this.init();
 	}
@@ -74,7 +76,7 @@ public class Person extends Resident {
 	// infected setter and update to infected counter
 	public void setInfected() {
 		state = virus.infected;
-		if (ctl != null) ctl.numInfected++;
+		if (settings != null) settings.numInfected++;
 	}
 	
 	//calculates health of person over time
@@ -84,17 +86,17 @@ public class Person extends Resident {
 		//infect people forever. 
 		if(state == virus.infected) {
 			//recoveryTime update
-			sickTime -= ctl.timerValue;
+			sickTime -= settings.timerValue;
 			
 			//once the person has been given enough time, they will be considered recovered
 			if(sickTime<=0) {
 				if(Math.random() < toDie) {
 					state = virus.died;
-					if (ctl != null) ctl.numDied++;
+					if (settings != null) settings.numDied++;
 				} else {
 					state = virus.recovered;
 				}
-				if (ctl != null) ctl.numInfected--;
+				if (settings != null) settings.numInfected--;
 			}
 		}			
 	}
@@ -145,6 +147,29 @@ public class Person extends Resident {
 	public String toString() {
 		
 		return ( "" + state + "\t" + sickTime + "\tx:" + x + "\t" + vx + "\ty:" + y + "\t" + vy ); 
+	}
+	
+	public void paint(Graphics g) {
+			
+			//set the color of the for the person oval based on the health status of person object
+			switch(state) {
+				case candidate:
+					g.setColor(Color.LIGHT_GRAY);
+					break;
+				case infected:
+					g.setColor(Color.red);
+					break;
+				case recovered:
+					g.setColor(Color.green);
+					break;
+				case died:
+					g.setColor(Color.black);
+					
+			}
+			
+			//draw the person oval in the simulation frame
+			g.fillOval(x, y, settings.OvalW, settings.OvalH);
+			
 	}
 	
 	/*
