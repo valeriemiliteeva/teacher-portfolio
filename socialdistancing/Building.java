@@ -12,8 +12,8 @@ public class Building {
 	BuildingLabel label;
 
 	public Building(List<Wall> walls, BuildingLabel label) {
-		super();
-		this.walls = walls;
+		super();// refer to parent object
+		this.walls = walls;//refer to buliding(wall is atribute)
 		this.label = label;
 	}
 
@@ -23,7 +23,7 @@ public class Building {
 
 	public void paint(Graphics g, JPanel view) {
 		for (Wall wall : walls) {
-			wall.paint(g, view);
+			wall.paint(g, view);//draw on jframe
 		}
 		label.paint(g);
 	}
