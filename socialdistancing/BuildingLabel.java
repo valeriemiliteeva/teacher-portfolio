@@ -18,7 +18,7 @@ public class BuildingLabel {
 
 	public void paint(Graphics g) {
 		//sets text color
-		g.setColor(Color.BLACK);
+		g.setColor(Color.BLUE);
 		g.setFont(new Font("Roboto", Font.BOLD, 20));
 
 		g.drawString(name, x, y);
