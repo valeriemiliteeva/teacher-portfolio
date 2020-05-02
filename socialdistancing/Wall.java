@@ -18,7 +18,7 @@ public class Wall{
     protected boolean vertical;
 
     public Wall(int x, int y, String imageS, boolean vertical) {
-
+        // object wall
         this.x = x;
         this.y = y;
         visible = true;
@@ -44,15 +44,15 @@ public class Wall{
     }
 
     public int getX() {
-        return x;
+        return x;// x cord
     }
 
     public int getY() {
-        return y;
+        return y;// y cord
     }
 
     public boolean isVisible() {
-        return visible;
+        return visible;//jrame
     }
 
     public void setVisible(Boolean visible) {
@@ -64,7 +64,8 @@ public class Wall{
     }
     
     public void paint(Graphics g, JPanel view)  {
-		g.drawImage(getImage(), getX(), getY(), view);
+        g.drawImage(getImage(), getX(), getY(), view);
+        //draws with the provided info
 
     }
 }
