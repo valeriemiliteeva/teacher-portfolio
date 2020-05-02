@@ -8,9 +8,7 @@ import java.util.ArrayList;
 public class Person extends Resident {
 
 	// health states
-	protected enum virus {
-		candidate, infected, recovered, died
-	};
+	protected enum virus { candidate, infected, recovered, died };
 
 	// recoveryTime
 	protected virus state = virus.candidate;
@@ -82,19 +80,25 @@ public class Person extends Resident {
 	}
 
 	// calculates health of person over time
-	public void healthManager() {
+	public void healthManager()
+	{
 
 		// If person is infected, they eventually recover or die so that they don't
 		// infect people forever.
-		if (state == virus.infected) {
+		if (state == virus.infected)
+		{
 			// recoveryTime update
 			sickTime -= settings.timerValue;
 
 			// once the person has been given enough time, they will be considered recovered
-			if (sickTime <= 0) {
-				if (Math.random() < toDie) {
+			if (sickTime <= 0)
+			{
+				if (Math.random() < toDie)
+				{
 					state = virus.died;
-				} else {
+				}
+				else
+				{
 					state = virus.recovered;
 				}
 			}
@@ -112,7 +116,7 @@ public class Person extends Resident {
 	/**
 	 * Collision between two person objects has been detected If two Person objects
 	 * collide they have a possibility of infecting!
-	 * 
+	 *
 	 * @param p2
 	 */
 	@Override
@@ -162,16 +166,16 @@ public class Person extends Resident {
 		// object
 
 		switch (state) {
-		case candidate:
-			return Color.LIGHT_GRAY;
-		case infected:
-			return Color.red;
-		case recovered:
-			return Color.green;
-		case died:
-			return Color.black;
+			case candidate:
+				return Color.LIGHT_GRAY;
+			case infected:
+				return Color.red;
+			case recovered:
+				return Color.green;
+			case died:
+				return Color.black;
 		}
-		throw new RuntimeException("bruh");
+		throw new RuntimeException("error in getColor function");
 	}
 
 	/*
@@ -185,6 +189,7 @@ public class Person extends Resident {
 			Person p = new Person();
 			pl.add(p);
 		}
+
 		for (Person p : pl) {
 			System.out.println(p);
 		}

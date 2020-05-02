@@ -48,8 +48,11 @@ public class Block {
 			if (walls.get(i).getBounds().intersects(personRect))
 				if (walls.get(i).vertical) {
 					p.vx *= -1;
-				} else
+				}
+				else
+				{
 					p.vy *= -1;
+				}
 		}
 	}
 

@@ -10,13 +10,13 @@ public class Building {
 
 	List<Wall> walls;
 	BuildingLabel label;
-	
+
 	public Building(List<Wall> walls, BuildingLabel label) {
 		super();
 		this.walls = walls;
 		this.label = label;
 	}
-	
+
 	public Building(BuildingLabel label, Wall ... walls) {
 		this(Arrays.asList(walls), label);
 	}
